@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <title>Depoimentos - Criar Time Pokémon</title>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  
+  <video autoplay muted loop id="bg-video" class="background-video">
+    <source src="imagens/background.mp4" type="video/mp4">
+  </video>
+
+  <div class="container">
+    
+  <div class="navbar">
+    <a href="blog.html">Blog</a>
+    <a href="postar.html">Nova Postagem</a>
+    <a href="times.html">Meus Times</a>
+    <a href="criar_time.html">Criar Time</a>
+    <a href="publicos.html">Times Públicos</a>
+    <a href="faq.html">FAQ</a>
+    <a href="depoimentos.html">Depoimentos</a>
+    <a href="sobre.html">Sobre</a>
+  </div>
+
+    
+  <h1>Depoimentos</h1>
+  <div class="grid three">
+    <div class="card"><p>"Site top! Montei meu primeiro time em 5 minutos."</p><span class="muted">— Alex</span></div>
+    <div class="card"><p>"A galeria ajudou a lembrar os tipos e fraquezas."</p><span class="muted">— Bianca</span></div>
+    <div class="card"><p>"Simples e bonito, funciona bem no celular."</p><span class="muted">— Carlos</span></div>
+  </div>
+  <h2>Deixe seu comentário</h2>
+  <textarea id="depInput" class="input" placeholder="Escreva aqui..."></textarea>
+  <button class="btn" id="depBtn">Enviar</button>
+  <div id="depList" class="stack"></div>
+  <script>
+    const key = 'depoimentos';
+    const list = document.getElementById('depList');
+    const btn = document.getElementById('depBtn');
+    const input = document.getElementById('depInput');
+    function render(){
+      const items = JSON.parse(localStorage.getItem(key) || '[]');
+      list.innerHTML = items.map(t => `<div class='card'>${'{'}t{'}'}</div>`).join('');
+    }
+    btn.onclick = ()=>{
+      const v = input.value.trim();
+      if(!v) return;
+      const items = JSON.parse(localStorage.getItem(key) || '[]');
+      items.unshift(v);
+      localStorage.setItem(key, JSON.stringify(items));
+      input.value='';
+      render();
+    };
+    render();
+  </script>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

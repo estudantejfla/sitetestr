@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <title>Cadastro - Criar Time Pokémon</title>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  
+  <video autoplay muted loop id="bg-video" class="background-video">
+    <source src="imagens/background.mp4" type="video/mp4">
+  </video>
+
+  <div class="container">
+    <a class="btn" href="blog.html">← Voltar para o Blog</a>
+<a class="btn" href="blog.html">← Voltar para o Blog</a>
+    
+  <div class="navbar">
+    <a href="blog.html">Blog</a>
+    <a href="postar.html">Nova Postagem</a>
+    <a href="times.html">Meus Times</a>
+    <a href="criar_time.html">Criar Time</a>
+    <a href="publicos.html">Times Públicos</a>
+    <a href="faq.html">FAQ</a>
+    <a href="depoimentos.html">Depoimentos</a>
+    <a href="sobre.html">Sobre</a>
+  </div>
+
+    
+  <h1>Criar Conta</h1>
+  <form id="cadForm" class="form">
+    <label>Usuário</label>
+    <input class="input" id="u" required>
+    <label>Email</label>
+    <input class="input" id="e" type="email" required>
+    <label>Senha</label>
+    <input class="input" id="s" type="password" required minlength="4">
+    <button class="btn" type="submit">Criar Conta</button>
+  </form>
+  <p class="muted">Já tem conta? <a href="index.html">Entrar</a></p>
+  <script>
+    document.getElementById('cadForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const u = document.getElementById('u').value.trim();
+      const e1 = document.getElementById('e').value.trim();
+      const s = document.getElementById('s').value.trim();
+      if(!u || !e1 || !s){  return; }
+      const contas = JSON.parse(localStorage.getItem('contas')||'{}');
+      if(contas[u]){ ; return; }
+      contas[u] = {senha: s, email: e1, times: []};
+      localStorage.setItem('contas', JSON.stringify(contas));
+      localStorage.setItem('logado', u);
+      location.href = 'times.html';
+    });
+  </script>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
